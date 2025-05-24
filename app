@@ -1,4 +1,3 @@
-
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button    import Button
@@ -258,13 +257,13 @@ class CourierApp(App):
         btn.bind(on_press=self.compute)
         root.add_widget(btn)
 
-        self.out = Label(halign="left", valign="top", size_hint_y=None, height=160)
-        self.out.bind(size=self.out.setter("text_size"))
-        root.add_widget(self.out)
-
-        self.out_rev = Label(halign="left", valign="top", size_hint_y=None, height=80)
-        self.out_rev.bind(size=self.out_rev.setter("text_size"))
-        root.add_widget(self.out_rev)
+        # self.out = Label(halign="left", valign="top", size_hint_y=None, height=160)
+        # self.out.bind(size=self.out.setter("text_size"))
+        # root.add_widget(self.out)
+        #
+        # self.out_rev = Label(halign="left", valign="top", size_hint_y=None, height=80)
+        # self.out_rev.bind(size=self.out_rev.setter("text_size"))
+        # root.add_widget(self.out_rev)
 
         self.best_label = Label(halign="left", valign="top", size_hint_y=None, height=80)
         self.best_label.bind(size=self.best_label.setter("text_size"))
@@ -299,10 +298,10 @@ class CourierApp(App):
 
             dist, path = solve_exact(s, stops, e)
 
-            self.out.text = f"Shortest distance: {dist}\n\nPath:\n{format_path(path)}"
+            # self.out.text = f"Shortest distance: {dist}\n\nPath:\n{format_path(path)}"
 
             if s == e:
-                self.out_rev.text = "Path(reversed):\n" + format_path(path[::-1])
+                # self.out_rev.text = "Path(reversed):\n" + format_path(path[::-1])
                 n = (len(path) + 1) // 2
                 first_half  = path[:n]
                 second_half = path[n:]
@@ -314,8 +313,8 @@ class CourierApp(App):
                 best = path if cnt(first_half) > cnt(second_half) else path[::-1]
                 self.best_label.text = "Best_Path:\n" + format_path(best)
             else:
-                self.out_rev.text   = "Path(reversed):\nNo Cicle"
-                self.best_label.text = "Best_Path:\nNo Cicle"
+                # self.out_rev.text   = "Path(reversed):\nNo Cicle"
+                self.best_label.text = "Path:\n" + format_path(path)
                 best = path
 
             # ---------- 选出黄 & 绿
@@ -330,9 +329,10 @@ class CourierApp(App):
             self.path_widget.set_path(path, dup_counts, specials)
 
         except Exception as ex:
-            self.out.text = f"Error: {ex}"
-            self.out_rev.text = ""
-            self.best_label.text = ""
+            # self.out.text = f"Error: {ex}"
+            # self.out_rev.text = ""
+            # self.best_label.text = ""
+            self.best_label.text = f"Error: {ex}"
 
 # ─── 六、程序入口
 if __name__ == "__main__":
